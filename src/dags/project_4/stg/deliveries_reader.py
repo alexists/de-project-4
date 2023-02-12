@@ -3,27 +3,31 @@ from typing import Dict, List
 import requests
 import json
 
-bissness_date = '{{ ds }}'
-
 class DeliveriesReader:   
     def get_couriers(self, base_url) -> List[Dict]:
-        print(bissness_date)
+        #bissness_date = {{'ds'}}
         api_token = "25c27781-8fde-4b30-a22e-524044a7580f"
-        nickname = "AlexeyMarkov"
-        cohort = "8"
+        nickname = "ZHENYOK"
+        cohort = "0"
         headers = {
                 "X-API-KEY": api_token,
                 "X-Nickname": nickname,
                 "X-Cohort": cohort 
                 }
-        to_date = bissness_date.strftime("%Y-%m-%d") + " 00:00:00"
-        from_date = bissness_date.strftime("%Y-%m-%d") + " 23:59:59"
+
+        today_date = datetime.datetime.now() - datetime.timedelta(days=1)
+        from_date = today_date.strftime("%Y-%m-%d") + " 00:00:00"
+        
+        #fr_date = today_date + datetime.timedelta(days=-7)
+        to_date =  today_date.strftime("%Y-%m-%d") + " 23:59:59"
+        print(from_date)
+        print(to_date)
         couriers_data = []
         offset = 0
         while True:
             params = {
-                    'from': from_date,
-                    'to': to_date,
+                    'from': str(from_date),
+                    'to': str(to_date),
                     'limit': '50', 
                     'offset': offset,
                     'sort_field': 'asc',

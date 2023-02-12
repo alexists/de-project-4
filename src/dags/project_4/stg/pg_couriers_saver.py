@@ -13,7 +13,9 @@ class PgCouriersSaver:
                 """
                     INSERT INTO stg.couriers(courier_id, name)
                     VALUES (%(courier_id)s, %(name)s)
-                    
+                    ON CONFLICT (courier_id) DO UPDATE
+                    SET
+                    name = EXCLUDED.name                 
                 """,
                 {
                     "courier_id": obj["_id"],
