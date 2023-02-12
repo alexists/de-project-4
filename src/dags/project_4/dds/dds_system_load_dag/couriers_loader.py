@@ -1,7 +1,7 @@
 from logging import Logger
 from typing import List, Dict
 
-from examples.dds import EtlSetting, DdsEtlSettingsRepository
+from examples import EtlSetting, DdsEtlSettingsRepository
 from lib import PgConnect
 from lib.dict_util import json2str
 from lib.dict_util import str2json
